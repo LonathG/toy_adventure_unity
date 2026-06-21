@@ -51,5 +51,27 @@ public class ToyManager : MonoBehaviour
     void TriggerVictory()
     {
         Debug.Log("Victory! All toys collected!");
+
+        // 1. Find the player object in the scene
+        GameObject player = GameObject.FindWithTag("Player");
+
+        if (player != null)
+        {
+            // 2. Get the Animator component from the player
+            Animator playerAnimator = player.GetComponent<Animator>();
+
+            if (playerAnimator != null)
+            {
+                // 3. Trigger the victory animation!
+                playerAnimator.SetBool("isWon", true);
+            }
+
+            // Optional: Disable the movement script so the player stops running around during victory
+            ToddlerPlayerController movementScript = player.GetComponent<ToddlerPlayerController>();
+            if (movementScript != null)
+            {
+                movementScript.enabled = false;
+            }
+        }
     }
 }
