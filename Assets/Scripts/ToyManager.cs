@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI; // Required for controlling UI Elements
 
 public class ToyManager : MonoBehaviour
@@ -73,5 +74,18 @@ public class ToyManager : MonoBehaviour
                 movementScript.enabled = false;
             }
         }
+
+        // 4. THIS is the line that actually presses "start" on the timer below
+        StartCoroutine(LoadNextLevelAfterDelay());
+    }
+
+    // Notice how this is completely OUTSIDE of the TriggerVictory() curly braces {}
+    System.Collections.IEnumerator LoadNextLevelAfterDelay()
+    {
+        // Wait for exactly 10 seconds
+        yield return new WaitForSeconds(8f);
+
+        // Load the next scene
+        SceneManager.LoadScene("Transition");
     }
 }
